@@ -38,7 +38,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, value }) => {
 				defaultValue={
 					value.trim().length
 						? value
-						: `//lets write some JS code import any (Module) and use it right away 😈`
+						: `//lets write some JS code import any (Module) ex: import react from 'React' \n// run show() to show on screen ex: show(<App/>), show(<h1></h1>), show(any value)`
 				}
 				onChange={(e) => {
 					onChange(e!);
