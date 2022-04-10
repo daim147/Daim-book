@@ -11,7 +11,7 @@ export default new Command()
 		filename = path.basename(filename);
 		try {
 			await serve(parseInt(options.port), filename, dir, !isProduction);
-			console.log(`  Server is running navigate to https://localhost:${options.port}
+			console.log(`  Server is running navigate to http://localhost:${options.port}
 			`);
 		} catch (error: any) {
 			if (error.code === 'EADDRINUSE') {
