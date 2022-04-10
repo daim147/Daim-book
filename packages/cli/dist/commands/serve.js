@@ -25,7 +25,7 @@ exports.default = new commander_1.Command()
     filename = path_1.default.basename(filename);
     try {
         yield (0, local_api_1.serve)(parseInt(options.port), filename, dir, !isProduction);
-        console.log(`  Server is running navigate to https://localhost:${options.port}
+        console.log(`  Server is running navigate to http://localhost:${options.port}
 			`);
     }
     catch (error) {
