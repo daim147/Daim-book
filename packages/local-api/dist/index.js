@@ -7,8 +7,10 @@ exports.serve = void 0;
 const express_1 = __importDefault(require("express"));
 const http_proxy_middleware_1 = require("http-proxy-middleware");
 const path_1 = __importDefault(require("path"));
+const router_1 = require("./router");
 const app = (0, express_1.default)();
 const serve = (port, fileName, dir, useProxy) => {
+    app.use((0, router_1.creatCellRouter)(fileName, dir));
     if (useProxy) {
         app.use((0, http_proxy_middleware_1.createProxyMiddleware)({
             target: 'http://localhost:3000',
@@ -17,7 +19,7 @@ const serve = (port, fileName, dir, useProxy) => {
         }));
     }
     else {
-        const packagePath = require.resolve('local-client/build/index.html');
+        const packagePath = require.resolve('@daim-book/local-client/build/index.html');
         app.use(express_1.default.static(path_1.default.dirname(packagePath)));
     }
     return new Promise((resolve, reject) => {

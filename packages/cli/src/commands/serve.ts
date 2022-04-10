@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { serve } from 'local-api';
+import { serve } from '@daim-book/local-api';
 import path from 'path';
 const isProduction = process.env.NODE_ENV === 'production';
 export default new Command()

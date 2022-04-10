@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
-const local_api_1 = require("local-api");
+const local_api_1 = require("@daim-book/local-api");
 const path_1 = __importDefault(require("path"));
 const isProduction = process.env.NODE_ENV === 'production';
 exports.default = new commander_1.Command()

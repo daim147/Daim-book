@@ -1,11 +1,18 @@
 {
-	"name": "local-api",
+	"name": "@daim-book/local-api",
 	"version": "1.0.0",
 	"description": "",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
-		"start": "tsc --watch --preserveWatchOutput"
+		"start": "tsc --watch --preserveWatchOutput",
+		"prepublishOnly": "tsc"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"keywords": [],
 	"author": "",
@@ -20,6 +27,6 @@
 		"cors": "^2.8.5",
 		"express": "^4.17.3",
 		"http-proxy-middleware": "^2.0.4",
-		"local-client": "^0.1.0"
+		"@daim-book/local-client": "^0.1.0"
 	}
 }

@@ -26,8 +26,9 @@ const creatCellRouter = (filename, dir) => {
             res.send(JSON.parse(result));
         }
         catch (error) {
-            if (error.message === 'ENOENT') {
+            if (error.code === 'ENOENT') {
                 yield promises_1.default.writeFile(fullPath, '[]', 'utf-8');
+                res.status(200).json([]);
             }
             else {
                 throw error;
@@ -39,5 +40,6 @@ const creatCellRouter = (filename, dir) => {
         yield promises_1.default.writeFile(fullPath, JSON.stringify(cells), 'utf-8');
         res.send({ status: 'ok' });
     }));
+    return router;
 };
 exports.creatCellRouter = creatCellRouter;
