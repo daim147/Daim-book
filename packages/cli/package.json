@@ -1,6 +1,6 @@
 {
 	"name": "daim-book",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"scripts": {
 		"start": "tsc --watch --preserveWatchOutput",
@@ -17,10 +17,10 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@daim-book/local-client": "^1.0.0"
+		"@daim-book/local-client": "^1.0.1"
 	},
 	"devDependencies": {
-		"@daim-book/local-api": "^1.0.0",
+		"@daim-book/local-api": "^1.0.1",
 		"@types/node": "^17.0.23",
 		"commander": "^9.1.0",
 		"esbuild": "0.8.26",
