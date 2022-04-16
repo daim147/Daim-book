@@ -74,8 +74,8 @@ export const fetchCells = () => async (dispatch: Dispatch<Actions>) => {
 		type: ActionType.FETCH_CELLS,
 	});
 	try {
-		const data = await localforage.getItem<Cell[]>('cells');
-		// const { data }: { data: Cell[] } = await axios.get('/cells');
+		// const data = await localforage.getItem<Cell[]>('cells');
+		const { data }: { data: Cell[] } = await axios.get('/cells');
 		if (!data?.length) {
 			dispatch(insertCellBefore(null, 'text', text));
 			dispatch(insertCellBefore(null, 'code', codeText));
@@ -100,8 +100,8 @@ export const saveCells = () => async (dispatch: Dispatch<Actions>, getState: () 
 		const { data, order } = cellsArray;
 		const cells = order.map((id) => data[id]);
 		try {
-			// await axios.post('/cells', { cells });
-			await localforage.setItem('cells', cells);
+			await axios.post('/cells', { cells });
+			// await localforage.setItem('cells', cells);
 		} catch (error: any) {
 			dispatch({
 				type: ActionType.SAVE_CELLS_ERROR,
