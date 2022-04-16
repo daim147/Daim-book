@@ -29,14 +29,9 @@ const CodeCell: React.FC<{ cell: Cell }> = ({ cell: { id, content } }) => {
 	}, [cumulativeCode, createBundle, id]);
 	return (
 		<Resizable direction='vertical'>
-			<div
-				style={{ display: 'flex', width: '100%', height: 'calc(100% - 10px)' }}
-			>
+			<div style={{ display: 'flex', width: '100%', height: 'calc(100% - 10px)' }}>
 				<Resizable direction='horizontal'>
-					<CodeEditor
-						onChange={(value) => updateCell(id, value)}
-						value={content}
-					/>
+					<CodeEditor onChange={(value) => updateCell(id, value)} value={content} />
 				</Resizable>
 				<div className={'progress-wrapper'}>
 					{!result || result.loading ? (

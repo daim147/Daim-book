@@ -25,6 +25,7 @@ export interface InsertBeforeCellAction {
 	payload: {
 		id: string | null;
 		type: CellTypes;
+		content: string;
 	};
 }
 export interface BundleStartAction {

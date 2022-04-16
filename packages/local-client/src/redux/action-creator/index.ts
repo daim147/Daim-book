@@ -14,6 +14,7 @@ import { build } from '../../bundle';
 import { Cell, CellTypes } from '../cell';
 import { RootState } from '../reducers';
 import localforage from 'localforage';
+import { codeText, text } from '../dummyText';
 
 export const updateCell = (id: string, content: string): UpdateCellAction => ({
 	type: ActionType.UPDATE_CELL,
@@ -30,12 +31,14 @@ export const deleteCell = (id: string): DeleteCellAction => ({
 
 export const insertCellBefore = (
 	id: string | null,
-	type: CellTypes
+	type: CellTypes,
+	content: string
 ): InsertBeforeCellAction => ({
 	type: ActionType.INSERT_CELL_BEFORE,
 	payload: {
 		id,
 		type,
+		content,
 	},
 });
 
@@ -57,7 +60,6 @@ export const createBundle =
 		});
 
 		const result = await build(rawCode);
-
 		dispatch({
 			type: ActionType.BUNDLE_COMPLETE,
 			payload: {
@@ -72,13 +74,13 @@ export const fetchCells = () => async (dispatch: Dispatch<Actions>) => {
 		type: ActionType.FETCH_CELLS,
 	});
 	try {
-		// const data = await localforage.getItem<Cell[]>('cells');
-		// 	dispatch({
-		// 		type: ActionType.FETCH_CELLS_COMPLETE,
-		// 		payload: data || [],
-		// 	});
-		const { data }: { data: Cell[] } = await axios.get('/cells');
-
+		const data = await localforage.getItem<Cell[]>('cells');
+		// const { data }: { data: Cell[] } = await axios.get('/cells');
+		if (!data?.length) {
+			dispatch(insertCellBefore(null, 'text', text));
+			dispatch(insertCellBefore(null, 'code', codeText));
+			return;
+		}
 		dispatch({
 			type: ActionType.FETCH_CELLS_COMPLETE,
 			payload: data,
@@ -92,20 +94,19 @@ export const fetchCells = () => async (dispatch: Dispatch<Actions>) => {
 	}
 };
 
-export const saveCells =
-	() => async (dispatch: Dispatch<Actions>, getState: () => RootState) => {
-		const { cells: cellsArray } = getState();
-		if (cellsArray) {
-			const { data, order } = cellsArray;
-			const cells = order.map((id) => data[id]);
-			try {
-				await axios.post('/cells', { cells });
-				// await localforage.setItem('cells', cells);
-			} catch (error: any) {
-				dispatch({
-					type: ActionType.SAVE_CELLS_ERROR,
-					payload: error.message,
-				});
-			}
+export const saveCells = () => async (dispatch: Dispatch<Actions>, getState: () => RootState) => {
+	const { cells: cellsArray } = getState();
+	if (cellsArray) {
+		const { data, order } = cellsArray;
+		const cells = order.map((id) => data[id]);
+		try {
+			// await axios.post('/cells', { cells });
+			await localforage.setItem('cells', cells);
+		} catch (error: any) {
+			dispatch({
+				type: ActionType.SAVE_CELLS_ERROR,
+				payload: error.message,
+			});
 		}
-	};
+	}
+};

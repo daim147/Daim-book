@@ -14,7 +14,7 @@ export const initializeEsBuild = async () => {
 };
 export const build = async (rawCode: string) => {
 	if (!service) {
-		return;
+		await initializeEsBuild();
 	}
 	try {
 		const result = await service.build({
