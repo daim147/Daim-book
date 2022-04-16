@@ -20,6 +20,8 @@
 # npx daim-book serve 
           or
 # npx daim-book serve text.js --port 3000
+          or
+# # npx daim-book serve text.js -p 3000
    
 ```
 ## All the content of cell will save into file
