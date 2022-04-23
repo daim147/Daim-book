@@ -24,4 +24,4 @@
 # # npx daim-book serve text.js -p 3000
    
 ```
-## All the content of cell will save into file
+## All the content of cell will save into file specified by you or default (notebook.js)
